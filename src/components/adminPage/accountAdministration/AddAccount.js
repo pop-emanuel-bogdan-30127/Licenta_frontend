@@ -6,26 +6,62 @@ function AddAccount() {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordConfirmation, setPasswordConfirmation] = useState("");
+  const [error, setError] = useState();
+  const [errorUsername, setErrorUsername] = useState("");
+  const [errorPassword, setErrorPassword] = useState();
 
   const history = useHistory();
 
-  const handleSubmit = React.useCallback((e) => {
+  const handleSubmit = React.useCallback(async (e) => {
     e.preventDefault();
+
     const account = {
       username,
       email,
       password,
     };
+    console.log(password);
+    console.log(passwordConfirmation);
+    if (passwordConfirmation === password) {
+      try {
+        const obiect = await AccountService.getAccountByUsername(
+          account.username
+        );
+        console.log("account => " + JSON.stringify(obiect.data));
 
-    AccountService.saveAccount(account)
-      .then((res) => {
-        console.log("account => " + JSON.stringify(account));
-        history.push("/admin_accounts");
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+        if (obiect.data) {
+          setError(true);
+          setErrorUsername(username + " username aready in use");
+        } else {
+          console.log("account => " + JSON.stringify(obiect.data));
+          AccountService.saveAccount(account)
+            .then((res) => {
+              setError(false);
+              console.log("account => " + JSON.stringify(account));
+              history.push("/admin_accounts");
+            })
+            .catch((error) => {
+              console.error(error);
+            });
+        }
+      } catch (error) {
+        console.error("Something went wrong!");
+      }
+    } else {
+      setErrorPassword("Confirmarea trebuie sa coincida cu parola");
+    }
   });
+
+  const passwordView = (id) => {
+    const x = document.getElementById(id);
+    console.log(document.getElementById(id));
+    if (x.type == "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  };
 
   const cancel = () => {
     history.push("/admin_accounts");
@@ -58,6 +94,7 @@ function AddAccount() {
                     maxLength={20}
                     required
                   ></input>
+                  {error && errorUsername}
                 </div>
                 <div className="form-group mb-2">
                   <label className="form-label"> Email: </label>
@@ -68,7 +105,7 @@ function AddAccount() {
                     className="form-control"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    pattern="^([a-zA-Z0-9.]){2,15}@([a-zA-Z0-9]){1,10}(\.)([a-zA-Z0-9]){1,10}$"
+                    pattern="^([a-zA-Z0-9.]){2,15}@(([a-zA-Z0-9]){1,10}(\.)){1,3}([a-zA-Z0-9]){1,10}$"
                     maxLength={30}
                     required
                   ></input>
@@ -76,6 +113,7 @@ function AddAccount() {
                 <div className="form-group mb-2">
                   <label className="form-label"> Parolă:</label>
                   <input
+                    id="password"
                     title="minim 8 caractere, minim o cifra, minim un caracter special"
                     type="password"
                     placeholder={password}
@@ -83,10 +121,36 @@ function AddAccount() {
                     className="form-control"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    pattern="^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,20}$"
+                    pattern="^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-_=+]).{8,20}$"
                     maxLength={20}
                     required
                   ></input>
+                  <input
+                    type="checkbox"
+                    onClick={(e) => passwordView("password")}
+                  />
+                  arata parola
+                </div>
+                <div className="form-group mb-2">
+                  <label className="form-label"> Confiormarea parolei:</label>
+                  <input
+                    id="confirmation"
+                    title="Must match the Password field"
+                    type="password"
+                    placeholder={passwordConfirmation}
+                    name="password"
+                    className="form-control"
+                    value={passwordConfirmation}
+                    onChange={(e) => setPasswordConfirmation(e.target.value)}
+                    pattern="^(?=.*?[0-9])(?=.*?[#?!@$ %^&*-_=+]).{8,20}$"
+                    maxLength={20}
+                    required
+                  ></input>
+                  <input
+                    type="checkbox"
+                    onClick={(e) => passwordView("confirmation")}
+                  />
+                  {errorPassword}
                 </div>
                 <div className="form-group mb-2"></div>
                 <button type="submit" className="btn btn-success">

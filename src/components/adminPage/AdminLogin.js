@@ -3,14 +3,13 @@ import axios from "axios";
 
 function AdminLogin() {
   const [errorMessages, setErrorMessages] = React.useState({});
+  const [username, setUsername] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const errors = {
     username: "username incorect",
     password: "parolă incorectă",
   };
-
-  const [username, setUsername] = React.useState("");
-  const [password, setPassword] = React.useState("");
 
   const backHome = (event) => {
     window.location.replace("http://localhost:3000");

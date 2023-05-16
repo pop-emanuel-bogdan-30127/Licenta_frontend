@@ -145,7 +145,7 @@ function UpdateOffice() {
                     className="form-control"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    pattern="^str(\.(\s){0,1}(([a-zA-Z]){2,15}\s){1,5}(\,){0,1})nr(\.(\s){0,1}([0-9]){1,4})$"
+                    pattern="^(str\.((\s){0,1}([a-zA-Z-]){2,15}){1,5}(,){0,1}(\s){1}nr\.(\s){0,1}([0-9]){1,4})$"
                     maxLength={50}
                     required
                   ></input>
