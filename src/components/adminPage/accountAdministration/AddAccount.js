@@ -21,24 +21,20 @@ function AddAccount() {
       email,
       password,
     };
-    console.log(password);
-    console.log(passwordConfirmation);
+
     if (passwordConfirmation === password) {
       try {
         const obiect = await AccountService.getAccountByUsername(
           account.username
         );
-        console.log("account => " + JSON.stringify(obiect.data));
 
         if (obiect.data) {
           setError(true);
           setErrorUsername(username + " username aready in use");
         } else {
-          console.log("account => " + JSON.stringify(obiect.data));
           AccountService.saveAccount(account)
             .then((res) => {
               setError(false);
-              console.log("account => " + JSON.stringify(account));
               history.push("/admin_accounts");
             })
             .catch((error) => {

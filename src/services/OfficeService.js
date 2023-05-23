@@ -19,12 +19,25 @@ class OfficeService {
   deleteOffice(officeId) {
     return axios.delete(OFFICE_API_BASE_URL + "/" + officeId);
   }
-  saveOfficeByAccountID(office, accountId) {
+  saveOfficeWithImage(accountId, office, image) {
+    return axios.post(
+      OFFICE_API_BASE_URL + "/" + accountId + "/image-office",
+      office,
+      image
+    );
+  }
+
+  saveOfficeByAccountID(accountId, office) {
     return axios.post(
       OFFICE_API_BASE_URL + "/" + accountId + "/offices",
       office
     );
   }
+
+  uploadImageforOffice(officeId, image) {
+    return axios.post(OFFICE_API_BASE_URL + "/" + officeId + "/image", image);
+  }
+
   getAllOfficesByAccountId(accountId) {
     return axios.get(OFFICE_API_BASE_URL + "/" + accountId + "/offices");
   }

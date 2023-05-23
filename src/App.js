@@ -8,33 +8,31 @@ import ViewOffice from "./components/adminPage/officeAdministration/ViewOffice";
 import UpdateOffice from "./components/adminPage/officeAdministration/UpdateOffice";
 import AdminLogin from "./components/adminPage/AdminLogin";
 import NavBar from "./components/navbar/NavBar";
-import AdminApp from "./components/adminPage/AdminApp";
 import AdminHome from "./components/adminPage/AdminHome";
-import Logout from "./components/adminPage/Logout";
 import ListAccount from "./components/adminPage/accountAdministration/ListAccount";
 import AddAccount from "./components/adminPage/accountAdministration/AddAccount";
 import UpdateAccount from "./components/adminPage/accountAdministration/UpdateAccount";
 import ViewAccount from "./components/adminPage/accountAdministration/ViewAccount";
+import UserLogin from "./components/userPage/UserLogin";
+import ImageUpload from "./components/adminPage/officeAdministration/ImageUpload";
 
 function App() {
   const [verification, setVerification] = React.useState(false);
+  const [adminName, setAdminName] = React.useState();
+  const [adminPassword, setAdminPassword] = React.useState();
 
   React.useEffect(() => {
     if (
       sessionStorage.getItem("admin_user") &&
       sessionStorage.getItem("admin_pass")
     ) {
+      setAdminName(sessionStorage.getItem("admin_user"));
+      setAdminPassword(sessionStorage.getItem("admin_pass"));
       setVerification(true);
     } else {
       setVerification(false);
     }
-    // console.log(" verified status:" + verification);
-    console.log(sessionStorage.getItem("admin_user"));
-    console.log(sessionStorage.getItem("admin_pass"));
-  }, [
-    sessionStorage.getItem("admin_user"),
-    sessionStorage.getItem("admin_pass"),
-  ]);
+  }, [adminName, adminPassword]);
 
   return (
     <div>
@@ -42,8 +40,6 @@ function App() {
         <NavBar />
         <div className="container-fluid container-page">
           <div className="container">
-            {sessionStorage.getItem("admin_user") &&
-              sessionStorage.getItem("admin_pass") && <Logout />}
             <Switch>
               <Route path="/" exact component={HomeComponent} />
               <Route
@@ -82,7 +78,8 @@ function App() {
                 path="/admin_view-account/:id"
                 component={verification ? ViewAccount : HomeComponent}
               />
-              <Route path="/login" component={AdminLogin} />
+              <Route path="/admin-login" component={AdminLogin} />
+              <Route path="/user-login" component={UserLogin} />
             </Switch>
           </div>
         </div>

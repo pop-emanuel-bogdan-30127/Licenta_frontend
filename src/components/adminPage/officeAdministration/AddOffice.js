@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useForm } from "react-hook-form";
 import OfficeService from "../../../services/OfficeService";
 import AccountService from "../../../services/AccountService";
-// import AsyncSelect from "react-select/async";
-// import Select from "react-select/dist/declarations/src/Select";
 
 function AddOffice() {
   const [title, setTitle] = useState();
@@ -18,6 +17,7 @@ function AddOffice() {
   const [city, setCity] = useState();
   const [account, setAccount] = useState();
   const [accountId, setAccountId] = useState();
+  //const [image, setImage] = useState();
   const history = useHistory();
 
   const handleSubmit = React.useCallback((e) => {
@@ -36,13 +36,18 @@ function AddOffice() {
       accountId,
     };
 
-    OfficeService.saveOfficeByAccountID(office, accountId)
+    // const imageFile = new FormData();
+    // imageFile.append("image", image);
+
+    // OfficeService.saveOfficeWithImage(accountId, office, imageFile)
+    OfficeService.saveOfficeByAccountID(accountId, office)
       .then((res) => {
         console.log("office => " + JSON.stringify(office));
         history.push("/admin_offices");
       })
       .catch((error) => {
         console.error(error);
+        console.error("Something went wrong");
       });
   });
 
@@ -59,7 +64,6 @@ function AddOffice() {
     AccountService.findAllAccounts()
       .then((response) => {
         setAccount(response.data);
-        console.log("account => " + JSON.stringify(response.data));
       })
       .catch((error) => {});
   };
@@ -119,6 +123,17 @@ function AddOffice() {
                     required
                   ></input>
                 </div>
+                {/* <div className="form-group mb-2">
+                  <label className="form-label"> Imagini:</label>
+                  <input
+                    type="file"
+                    name="images"
+                    className="form-control"
+                    accept="image/*"
+                    onChange={(e) => setImage(e.target.files[0])}
+                    required
+                  ></input>
+                </div> */}
                 <div className="form-group mb-2">
                   <label className="form-label"> Preț (lei):</label>
                   <input
@@ -128,7 +143,6 @@ function AddOffice() {
                     className="form-control"
                     value={price}
                     onChange={(e) => setPrice(e.target.value)}
-                    // pattern="([0-9]){1,4}(\.([0-9]){1,2}){0,1}"
                     step={0.01}
                     max={9999.99}
                     maxLength={7}
@@ -144,7 +158,6 @@ function AddOffice() {
                     className="form-control"
                     value={space}
                     onChange={(e) => setSpace(e.target.value)}
-                    // pattern="([0-9]){1,3}(\.([0-9]){1,2}){0,1}"
                     step={0.01}
                     max={999.99}
                     maxLength={6}
