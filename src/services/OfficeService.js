@@ -19,9 +19,6 @@ class OfficeService {
   deleteOffice(officeId) {
     return axios.delete(OFFICE_API_BASE_URL + "/" + officeId);
   }
-<<<<<<< Updated upstream
-  saveOfficeByAccountID(office, accountId) {
-=======
   /////////////////
   saveOfficeWithImage(accountId, office, image) {
     return axios.post(
@@ -32,19 +29,15 @@ class OfficeService {
   }
   /////////////////
   saveOfficeByAccountID(accountId, office) {
->>>>>>> Stashed changes
     return axios.post(
       OFFICE_API_BASE_URL + "/" + accountId + "/offices",
       office
     );
   }
-<<<<<<< Updated upstream
-=======
   uploadImageforOffice(officeId, image) {
     return axios.post(OFFICE_API_BASE_URL + "/" + officeId + "/image", image);
   }
 
->>>>>>> Stashed changes
   getAllOfficesByAccountId(accountId) {
     return axios.get(OFFICE_API_BASE_URL + "/" + accountId + "/offices");
   }

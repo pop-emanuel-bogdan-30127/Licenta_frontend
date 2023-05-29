@@ -15,8 +15,6 @@ import ListAccount from "./components/adminPage/accountAdministration/ListAccoun
 import AddAccount from "./components/adminPage/accountAdministration/AddAccount";
 import UpdateAccount from "./components/adminPage/accountAdministration/UpdateAccount";
 import ViewAccount from "./components/adminPage/accountAdministration/ViewAccount";
-<<<<<<< Updated upstream
-=======
 import UserLogin from "./components/userPage/UserLogin";
 import ImageUpload from "./components/adminPage/officeAdministration/ImageUpload";
 import NewAccount from "./components/userPage/NewAccount";
@@ -24,7 +22,6 @@ import EditAccount from "./components/userPage/EditAccount";
 import MyOffices from "./components/userPage/MyOffices";
 import EditOffice from "./components/userPage/EditOffice";
 import NewOffice from "./components/userPage/NewOffice";
->>>>>>> Stashed changes
 
 function App() {
   const [verification, setVerification] = React.useState(false);
@@ -109,9 +106,7 @@ function App() {
                 path="/admin_view-account/:id"
                 component={verification ? ViewAccount : HomeComponent}
               />
-<<<<<<< Updated upstream
-              <Route path="/login" component={AdminLogin} />
-=======
+
               <Route path="/admin-login" component={AdminLogin} />
               <Route path="/user-login" component={UserLogin} />
               <Route path="/new-account" component={NewAccount} />
@@ -132,7 +127,6 @@ function App() {
                 path="/new-office"
                 component={userVerification ? NewOffice : HomeComponent}
               />
->>>>>>> Stashed changes
             </Switch>
           </div>
         </div>
