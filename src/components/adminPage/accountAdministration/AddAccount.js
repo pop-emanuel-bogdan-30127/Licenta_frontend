@@ -72,7 +72,7 @@ function AddAccount() {
       <div className="container">
         <div className="row">
           <div
-            className="card col-md-6 offset-md-3 offset-md-3"
+            className="card col-md-6 offset-md-3"
             style={{ backgroundColor: "#adc5e9" }}
           >
             <br />

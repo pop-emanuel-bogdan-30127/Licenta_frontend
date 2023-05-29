@@ -19,7 +19,10 @@ class CustomerService {
     return axios.delete(CUSTOMER_ACCOUNT_API_BASE_URL + "/" + accountId);
   }
   getAccountByUsername(username) {
-    return axios.get(CUSTOMER_ACCOUNT_API_BASE_URL + "/" + username);
+    return axios.get(CUSTOMER_ACCOUNT_API_BASE_URL + "/username/" + username);
+  }
+  getAccountByEmail(email) {
+    return axios.get(CUSTOMER_ACCOUNT_API_BASE_URL + "/email/" + email);
   }
 }
 

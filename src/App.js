@@ -15,9 +15,23 @@ import ListAccount from "./components/adminPage/accountAdministration/ListAccoun
 import AddAccount from "./components/adminPage/accountAdministration/AddAccount";
 import UpdateAccount from "./components/adminPage/accountAdministration/UpdateAccount";
 import ViewAccount from "./components/adminPage/accountAdministration/ViewAccount";
+<<<<<<< Updated upstream
+=======
+import UserLogin from "./components/userPage/UserLogin";
+import ImageUpload from "./components/adminPage/officeAdministration/ImageUpload";
+import NewAccount from "./components/userPage/NewAccount";
+import EditAccount from "./components/userPage/EditAccount";
+import MyOffices from "./components/userPage/MyOffices";
+import EditOffice from "./components/userPage/EditOffice";
+import NewOffice from "./components/userPage/NewOffice";
+>>>>>>> Stashed changes
 
 function App() {
   const [verification, setVerification] = React.useState(false);
+
+  const [userVerification, setUserVerification] = React.useState(false);
+  const [userPassword, setUserPassword] = React.useState();
+  const [userName, setUserName] = React.useState();
 
   React.useEffect(() => {
     if (
@@ -35,6 +49,19 @@ function App() {
     sessionStorage.getItem("admin_user"),
     sessionStorage.getItem("admin_pass"),
   ]);
+
+  React.useEffect(() => {
+    if (
+      sessionStorage.getItem("user_name") &&
+      sessionStorage.getItem("user_pass")
+    ) {
+      setUserName(sessionStorage.getItem("user_name"));
+      setUserPassword(sessionStorage.getItem("user_pass"));
+      setUserVerification(true);
+    } else {
+      setUserVerification(false);
+    }
+  }, [userName, userPassword]);
 
   return (
     <div>
@@ -82,7 +109,30 @@ function App() {
                 path="/admin_view-account/:id"
                 component={verification ? ViewAccount : HomeComponent}
               />
+<<<<<<< Updated upstream
               <Route path="/login" component={AdminLogin} />
+=======
+              <Route path="/admin-login" component={AdminLogin} />
+              <Route path="/user-login" component={UserLogin} />
+              <Route path="/new-account" component={NewAccount} />
+
+              <Route
+                path="/edit-account"
+                component={userVerification ? EditAccount : HomeComponent}
+              />
+              <Route
+                path="/my-offices"
+                component={userVerification ? MyOffices : HomeComponent}
+              />
+              <Route
+                path="/edit-office/:id"
+                component={userVerification ? EditOffice : HomeComponent}
+              />
+              <Route
+                path="/new-office"
+                component={userVerification ? NewOffice : HomeComponent}
+              />
+>>>>>>> Stashed changes
             </Switch>
           </div>
         </div>

@@ -70,7 +70,7 @@ function UpdateOffice() {
       <div className="container">
         <div className="row">
           <div
-            className="card col-md-6 offset-md-3 offset-md-3"
+            className="card col-md-6 offset-md-3"
             style={{ backgroundColor: "#adc5e9" }}
           >
             <br />
@@ -193,7 +193,7 @@ function UpdateOffice() {
                 </div>
                 <div className="form-group mb-2">
                   <label className="form-label"> Descriere: (opțional)</label>
-                  <input
+                  <textarea
                     type="text"
                     placeholder="Descriere..."
                     name="description"
@@ -201,7 +201,7 @@ function UpdateOffice() {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     maxLength={500}
-                  ></input>
+                  ></textarea>
                 </div>
                 <div className="form-group mb-2">
                   <label className="form-label">Nr. locuri de parcare:</label>
