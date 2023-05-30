@@ -13,9 +13,6 @@ function HomeComponent() {
   const [officeId, setOfficeId] = React.useState([]);
   const history = useHistory();
 
-  const adminLogin = () => {
-    history.push("/login");
-  };
   React.useEffect(() => {
     getAllOffices();
   }, []);
@@ -33,9 +30,6 @@ function HomeComponent() {
       <br />
       <h2 className="text-center">Lista de Anunturi</h2>
       <div>
-        <button className="btn btn-primary" onClick={() => adminLogin()}>
-          Admin Login
-        </button>
         <div className="p-4 mb-4 rounded text-bg-dark">
           <div className="col-md-5 px-0">
             <h1 className="display-5 fst-italic">

@@ -25,6 +25,10 @@ function UserLogin() {
     console.log(username);
     console.log(password);
 
+    sessionStorage.setItem("user_name", username);
+    sessionStorage.setItem("user_pass", password);
+
+    console.log(sessionStorage.getItem("user_name"));
     try {
       const object = await axios.get(
         `${"http://localhost:8082/api/v1/customer/username/"}${username}`

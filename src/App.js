@@ -66,8 +66,6 @@ function App() {
         <NavBar />
         <div className="container-fluid container-page">
           <div className="container">
-            {sessionStorage.getItem("admin_user") &&
-              sessionStorage.getItem("admin_pass") && <Logout />}
             <Switch>
               <Route path="/" exact component={HomeComponent} />
               <Route

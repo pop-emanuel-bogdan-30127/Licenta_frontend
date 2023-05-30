@@ -13,6 +13,7 @@ function EditOffice() {
   const [description, setDescription] = useState("");
   const [telephone, setTelephone] = useState("");
   const [city, setCity] = useState("");
+  const [image, setImage] = useState("");
   const history = useHistory();
   const { id } = useParams();
 
@@ -29,6 +30,7 @@ function EditOffice() {
       city,
       telephone,
       description,
+      image,
     };
     if (id) {
       OfficeService.updateOffice(newOffice, id)
@@ -54,6 +56,7 @@ function EditOffice() {
         setCity(res.data.city);
         setDescription(res.data.description);
         setTelephone(res.data.telephone);
+        setImage(res.data.image);
       })
       .catch((error) => {
         console.error(error);
