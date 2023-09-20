@@ -1,0 +1,26 @@
+
+.pagination_button {
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    background: olivedrab
+}
+
+.pagination_button_active {
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    margin: 0 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 900;
+    border-color: red;
+    background: #049799;
+}
+
+.card_main{
+    cursor: pointer;
+}
